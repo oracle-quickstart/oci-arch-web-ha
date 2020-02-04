@@ -22,7 +22,11 @@ Verify terraform is installed successfully using below command.
 
 I have used Terraform to spin up the infrastructure.
 
-Go ahead and download the zip folder `web-app.zip` contained in this repository. Unzip it on your machine and open in your favorite editor. (Vim, Sublime, VSCode, Atom etc.)
+Go ahead and clone this repo using below command.
+
+`git clone https://github.com/KartikShrikantHegde/oci-arch-web-ha.git`
+
+Once you clone, open in your machine using your favorite editor. (Vim, Sublime, VSCode, Atom etc.)
 
 In the opened editor, edit the file `env.sh` to fill in the details specific to your account on OCI.
 
@@ -36,9 +40,9 @@ When all the variables set, you are ready to run the terraform script.
 
 ### Step 2: Running the script
 
-On the terminal or command line, cd into the downloaded folder `web-app`
+On the terminal or command line, make sure you are inside the working directory. If not, cd into the folder `oci-arch-web-ha`
 
-`cd web-app`
+`cd oci-arch-web-ha`
 
 Let’s export all the variables from `env.sh` into current directory.
 
