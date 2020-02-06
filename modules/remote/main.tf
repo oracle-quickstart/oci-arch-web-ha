@@ -21,8 +21,8 @@ resource "null_resource" "app-config1" {
 
     inline = [
       "touch /tmp/temp.txt",
-      "chmod +x /tmp/my_script1.sh",
-      "sudo yes | /tmp/my_script1.sh ${var.db_node_public_ip1} ${var.docker_username} ${var.docker_password} > /tmp/c1output1.txt"
+      "chmod +x /tmp/script1.sh",
+      "sudo yes | /tmp/script1.sh ${var.db_node_public_ip1} ${var.docker_username} ${var.docker_password} > /tmp/output1.txt"
     ]
   }
 }
@@ -51,8 +51,8 @@ resource "null_resource" "app-config2" {
     }
 
     inline = [
-      "chmod +x /tmp/my_script2.sh",
-      "sudo yes | /tmp/my_script2.sh ${var.db_node_public_ip1} ${var.docker_username} ${var.docker_password} > /tmp/c2output2.txt"
+      "chmod +x /tmp/script2.sh",
+      "sudo yes | /tmp/script2.sh ${var.db_node_public_ip1} ${var.docker_username} ${var.docker_password} > /tmp/output2.txt"
     ]
   }
 }

@@ -10,7 +10,7 @@ variable "ssh_public_key" {}
 variable "instance_shape" {}
 variable "ssh_authorized_private_key" {}
 
-# Uses Default Value
+# Specify any Default Value's here
 
 variable "availability_domain" {
   default="3"
@@ -21,8 +21,13 @@ variable "instance_user" {
 }
 
 variable "compartment_name" {
-  default = "Kartik"
+  default = "Compartment name to work-on"
 }
+
+/*
+we are specifying dokcer username and password to deploy a sample app. 
+However specify the username and password of your docker hub where you have your docker image stored.
+*/
 
 variable "docker_username" {
   default = "testuser2000"

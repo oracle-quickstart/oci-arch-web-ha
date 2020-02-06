@@ -2,8 +2,6 @@
 *  calling the different modules from this main file
 */
 
-# call module for creating the user
-
 module "user"{
     source = "./modules/identity/user"
     tenancy_ocid = "${var.tenancy_ocid}"
@@ -22,7 +20,7 @@ module "policy"{
     compartment_ocid = "${var.compartment_ocid}"
 }
 
-module "vcn" {
+module "vcn"{
   source = "./modules/vcn"
   tenancy_ocid = "${var.tenancy_ocid}"
   compartment_ocid = "${var.compartment_ocid}"
