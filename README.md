@@ -24,13 +24,15 @@ I have used Terraform to spin up the infrastructure.
 
 Go ahead and clone this repo using below command.
 
-`git clone https://github.com/KartikShrikantHegde/oci-arch-web-ha.git`
+`git clone https://github.com/oracle-quickstart/oci-arch-web-ha.git`
 
 Once you clone, open in your machine using your favorite editor. (Vim, Sublime, VSCode, Atom etc.)
 
+We need to update 2 files.
+
 In the opened editor, edit the file `env.sh` to fill in the details specific to your account on OCI.
 
-In `vars.tf` file, go ahead and provide the compartment name based on the compartment you have created or plan to create. If you are using `root` compartment, please provide the same name in the file.
+In `vars.tf` file, go ahead and provide the `compartment_name` based on the compartment you have created or plan to create. If you are using `root` compartment, please provide the same name in the file.
 
 #### *** Optional Step ***
 
@@ -40,7 +42,7 @@ When all the variables set, you are ready to run the terraform script.
 
 ### Step 2: Running the script
 
-On the terminal or command line, make sure you are inside the working directory. If not, cd into the folder `oci-arch-web-ha`
+On the terminal or command line, make sure you are inside the working directory. If not, cd into the folder `oci-arch-web-ha` using below command
 
 `cd oci-arch-web-ha`
 
@@ -85,3 +87,5 @@ Finally, if you like to destroy all the created resources, run below command.
 `terraform destroy`
 
 It will prompt ***Enter a value***. Type ***yes***
+
+This completes the deployment.
