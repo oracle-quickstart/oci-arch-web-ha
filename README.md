@@ -1,5 +1,5 @@
-# Web-App
-A deployable solution for web application on highly available infrastructure in Oracle Cloud Infrastructure.
+# Web-Application
+A deployable solution for web application on highly available infrastructure on Oracle Cloud Infrastructure.
 
 
 ## Pre-Requisites
@@ -18,9 +18,9 @@ Verify terraform is installed successfully using below command.
 
 ## Deploying the solution
 
-### Step 1: Spinning up the infrastructure
+### Step 1: Updating the configuration files
 
-I have used Terraform to spin up the infrastructure.
+This solution uses Terraform to spin up the infrastructure.
 
 Go ahead and clone this repo using below command.
 
@@ -36,11 +36,11 @@ In `vars.tf` file, go ahead and provide the `compartment_name` based on the comp
 
 #### *** Optional Step ***
 
-Also if you want to use your own docker image stored in docker hub, edit the file `vars.tf` to enter docker username and password. If you plan on using the one used for this implementation then you can ignore and keep it as it is. 
+Also, if you want to use your own docker image stored in docker hub, edit the file `vars.tf` to enter docker username and password. If you plan on using the one used for this implementation then you can ignore and keep it as it is. 
 
-When all the variables set, you are ready to run the terraform script.
+When all the variables are set, you are ready to run the terraform script.
 
-### Step 2: Running the script
+### Step 2: Running the script for deployment
 
 On the terminal or command line, make sure you are inside the working directory. If not, cd into the folder `oci-arch-web-ha` using below command
 
@@ -64,11 +64,11 @@ Apply Terraform using below command
 
 It will prompt ***Enter a value***. Type ***yes***
 
-This will start creating the resources on OCI and might take ~1 hour to finish the job.
+This will start creating the resources and deployment on OCI and might take ~1 hour to finish the job.
 
-Once, it completes you should be able to login to OCI and see all the resources provisioned as expected in terraform.
+Once it completes, you should be able to login to OCI and see all the resources provisioned as expected in terraform.
 
-## Testing
+## Testing the deployment
 
 Go to created resource load balancer and grab it’s public IP.
 
