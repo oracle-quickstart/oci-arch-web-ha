@@ -1,3 +1,6 @@
+## Copyright © 2020, Oracle and/or its affiliates. 
+## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
+
 resource "null_resource" "compute-script1" {
   depends_on = [oci_database_db_system.test_db_system1]
   provisioner "file" {
