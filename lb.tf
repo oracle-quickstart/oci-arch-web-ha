@@ -19,10 +19,10 @@ resource "oci_load_balancer_backend_set" "lb-bes1" {
     protocol            = "HTTP"
     response_body_regex = ".*"
     url_path            = "/api"
-    interval_ms         = "1000"
+    interval_ms         = "10000"
     return_code         = "200"
-    timeout_in_millis   = "50"
-    retries             = "2147483646"
+    timeout_in_millis   = "3000"
+    retries             = "3"
   }
 }
 
