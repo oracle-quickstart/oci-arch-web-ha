@@ -21,7 +21,7 @@ resource "oci_load_balancer_backend_set" "lb-bes1" {
     port                = "5000"
     protocol            = "HTTP"
     response_body_regex = ".*"
-    url_path            = "/api"
+    url_path            = "/"
     interval_ms         = "10000"
     return_code         = "200"
     timeout_in_millis   = "3000"
