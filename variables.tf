@@ -49,8 +49,8 @@ variable "instance_shape" {
 }
 
 /*
-we are specifying dokcer username and password to deploy a sample app. 
-However specify the username and password of your docker hub where you have your docker image stored.
+we are specifying username's and password's to be used here for the app. 
+However specify the username and password of your choice if you want to change it.
 */
 
 variable "db_system_shape" {
