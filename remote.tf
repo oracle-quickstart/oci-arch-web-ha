@@ -25,7 +25,7 @@ resource "null_resource" "app-config1" {
 
     inline = [
       "chmod +x /tmp/script1.sh",
-      "sudo yes | /tmp/script1.sh ${data.oci_core_vnic.db_node_vnic1.public_ip_address} ${var.docker_username} ${var.docker_password} > /tmp/output1.txt",
+      "sudo yes | /tmp/script1.sh ${data.oci_core_vnic.db_node_vnic1.public_ip_address} > /tmp/output1.txt",
     ]
   }
 }
@@ -55,7 +55,7 @@ resource "null_resource" "app-config2" {
 
     inline = [
       "chmod +x /tmp/script2.sh",
-      "sudo yes | /tmp/script2.sh ${data.oci_core_vnic.db_node_vnic1.public_ip_address} ${var.docker_username} ${var.docker_password} > /tmp/output2.txt",
+      "sudo yes | /tmp/script2.sh ${data.oci_core_vnic.db_node_vnic1.public_ip_address} > /tmp/output2.txt",
     ]
   }
 }

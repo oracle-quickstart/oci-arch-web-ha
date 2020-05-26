@@ -4,7 +4,7 @@
 #!/bin/bash
 sudo echo "Starting the script"
 
-sudo echo $1, $2, $3
+sudo echo $1
 
 sudo echo "disable the firewall"
 
@@ -20,13 +20,9 @@ sudo yum install -y docker-engine
 sudo systemctl enable docker
 sudo systemctl start docker
 
-USERNAME=$2
-PASSWORD=$3
-
 # Pulling the docker image from docker hub
 sudo echo "Pulling the docker image from docker hub"
 
-sudo docker login --username="${USERNAME}" --password="${PASSWORD}"
 sudo docker pull testuser2000/python-flask:python-flask-app
 
 # deploying the app

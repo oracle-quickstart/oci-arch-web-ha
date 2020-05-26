@@ -53,14 +53,6 @@ we are specifying dokcer username and password to deploy a sample app.
 However specify the username and password of your docker hub where you have your docker image stored.
 */
 
-variable "docker_username" {
-  default = "testuser2000"
-}
-
-variable "docker_password" {
-  default = "testpassword123"
-}
-
 variable "db_system_shape" {
   default = "VM.Standard2.1"
 }
