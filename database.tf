@@ -20,7 +20,7 @@ resource "oci_database_db_system" "test_db_system1" {
   ssh_public_keys         = [chomp(file(var.ssh_public_key))]
   hostname                = var.hostname
   data_storage_size_in_gb = var.data_storage_size_in_gb
-  node_count              = data.oci_database_db_system_shapes.test_db_system_shapes1.db_system_shapes[0]["minimum_node_count"]
+  node_count              = var.node_count
 }
 
 resource "null_resource" "setup1" {
