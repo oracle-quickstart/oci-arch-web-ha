@@ -19,23 +19,17 @@
         - instance_os
         - instance_shape
         - linux_os_version
-        - db_system_shape
-        - db_edition
-        - db_version
-        - data_storage_size_in_gb
-        - node_count
 
       - title: Required Configuration
         visible: true  
         variables:
-        - db_name
-        - db_admin_password
-        - hostname
+        - ATP_password
 
       - title: Optional Configuration
         visible: true
         variables:
         - ssh_public_key
+        - ssh_private_key
 
     variables:
       
@@ -92,79 +86,16 @@
         required: true
         title: Instance OS version
         description: An Operating System version that determines the operating system version for the instance.
-        default: "7.7"
+        default: "7.8"
         dependsOn:
           compartmentId: ${compartment_ocid}
       
-      db_system_shape:
-        type: oci:core:dbsystemshape:name
-        required: true
-        title: Database Shape
-        description: A shape is a template that determines the number of CPUs, amount of memory, and other resources allocated to a newly created database instance.
-        default: "VM.Standard2.1"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
-      
-      db_version:
-        type: oci:core:dbversion:name
-        required: true
-        title: Database Version
-        description: The version for the database instance.
-        default: "12.1.0.2"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
-
-      db_edition:
-        type: oci:core:dbedition:name
-        required: true
-        title: Database edition
-        description: The edition for the database instance.
-        default: "ENTERPRISE_EDITION"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
-      
-      data_storage_size_in_gb:
-        type: oci:core:datastoragesizeingb:name
-        required: true
-        title: Database storage size
-        description: The storage required for the database instance.
-        default: "256"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
-      
-      node_count:
-        type: oci:core:nodecount:name
-        required: true
-        title: Database node size count
-        description: The number of nodes used for the database instance.
-        default: "1"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
-      
-      db_name:
+      ATP_password:
         type: string
         required: true
-        title: Database Name
-        description: Name of the Database instance
-        default: "aTFdb"
-        minLength: 1
-        maxLength: 14
-      
-      db_admin_password:
-        type: string
-        required: true
-        title: Database passowrd
-        description: password for of the Database instance
+        title: ATP database passowrd
+        description: password for of the ATP Database
         default: "BEstrO0ng_#12"
-        minLength: 1
-        maxLength: 14
-      
-      hostname:
-        type: string
-        required: true
-        title: Database hostname
-        description: hostname for of the Database instance
-        default: "myoracledb"
         minLength: 1
         maxLength: 14
 
@@ -172,5 +103,11 @@
         type: text
         required: false
         title: SSH Public Key
-        description: A public key is used to authenticate to remote compute instances. Upload the public key now. When you connect, you will provide the associated private key.
-  
+        description: A public key is used to authenticate to remote compute instances. 
+
+      ssh_private_key:
+        type: text
+        required: false
+        title: SSH Private Key
+        description: A private key is used to authenticate to remote compute instances. 
+    
