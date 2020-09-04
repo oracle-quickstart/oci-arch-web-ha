@@ -21,6 +21,15 @@ Now, you'll want a local copy of this repo. You can make that with the commands:
     cd oci-arch-web-ha
     ls
 
+## OCI ATP instead of DBSystem
+If you want to use OCI ATP instance instead of DBSystem, you need to fetch "atp" branch from the repo:
+
+    git clone https://github.com/oracle-quickstart/oci-arch-web-ha.git
+    cd oci-arch-web-ha
+    git fetch
+    git branch
+    git checkout atp
+
 ## Prerequisites
 First off, you'll need to do some pre-deploy setup.  That's all detailed [here](https://github.com/cloud-partners/oci-prerequisites).
 
@@ -39,6 +48,10 @@ ssh_private_key  = "<private_ssh_key_path>"
 
 # Region
 region = "<oci_region>"
+
+# database (only for ATP branch)
+ATP_password           = "<ATP_user_password>"
+ATP_data_guard_enabled = false # set the value to true only when you want to enable standby and then re-run terraform apply
 
 # Compartment
 compartment_ocid = "<compartment_ocid>"
