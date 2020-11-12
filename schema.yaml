@@ -79,22 +79,22 @@
 
       # Optional Configuration      
       instance_shape:
-        type: oci:core:instanceshape:name
-        required: true
+        type: string
+        required: false
         title: "Instance Shape"
         description: "A shape is a template that determines the number of CPUs, amount of memory, and other resources allocated to a newly created instance."
         default: "VM.Standard2.1"
       
       instance_os:
-        type: oci:core:instanceos:name
-        required: true
+        type: string
+        required: false
         title: "Instance OS"
         description: "An Operating System that determines the operating system for the instance."
         default: "Oracle Linux"
       
       linux_os_version:
-        type: oci:core:linuxosversion:name
-        required: true
+        type: string
+        required: false
         title: "Instance OS version"
         description: "An Operating System version that determines the operating system version for the instance."
         default: "7.8"
