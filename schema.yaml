@@ -57,8 +57,6 @@
 
       availability_domain:
         type: oci:identity:availabilitydomain:name
-        dependsOn:
-          compartmentId: ${compartment_ocid}
         required: true
         visibile: true
         title: "Availability Domain to be chosen."
@@ -86,8 +84,6 @@
         title: "Instance Shape"
         description: "A shape is a template that determines the number of CPUs, amount of memory, and other resources allocated to a newly created instance."
         default: "VM.Standard2.1"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
       
       instance_os:
         type: oci:core:instanceos:name
@@ -95,8 +91,6 @@
         title: "Instance OS"
         description: "An Operating System that determines the operating system for the instance."
         default: "Oracle Linux"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
       
       linux_os_version:
         type: oci:core:linuxosversion:name
@@ -104,8 +98,6 @@
         title: "Instance OS version"
         description: "An Operating System version that determines the operating system version for the instance."
         default: "7.8"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
       
       ATP_database_cpu_core_count:
         type: number
