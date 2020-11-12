@@ -2,47 +2,46 @@
     # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
     title: "Highly available three-tier web application"
-    stackDescription: Deploy a highly available sample flask web application
+    stackDescription: "Deploy a highly available sample flask web application"
     schemaVersion: 1.1.0
-    version: "20200601"
+    version: "20190404"
     locale: "en"
 
     variableGroups:
-      - title: General Configuration
-        visible: false
-        variables:
-        - tenancy_ocid
+    - title: General Configuration
+      visible: false
+      variables:
+      - tenancy_ocid
 
-      - title: Required Configuration
-        visible: true  
-        variables:
-        - compartment_ocid
-        - region
-        - availability_domain
-        - ATP_password
-        - ATP_data_guard_enabled 
+    - title: Required Configuration
+      visible: true  
+      variables:
+      - compartment_ocid
+      - region
+      - availability_domain
+      - ATP_password
+      - ATP_data_guard_enabled 
 
-      - title: Optional Configuration
-        visible: true
-        variables:
-        - instance_os
-        - instance_shape
-        - linux_os_version 
-        - ATP_database_cpu_core_count
-        - ATP_database_data_storage_size_in_tbs
-        - ATP_database_db_name
-        - ATP_database_db_version
-        - ATP_database_defined_tags_value
-        - ATP_database_display_name
-        - ATP_database_freeform_tags
-        - ATP_database_license_model
-        - ATP_tde_wallet_zip_file
-        - ATP_private_endpoint_label
-        - ATP_data_guard_enabled 
+    - title: Optional Configuration
+      visible: true
+      variables:
+      - instance_os
+      - instance_shape
+      - linux_os_version 
+      - ATP_database_cpu_core_count
+      - ATP_database_data_storage_size_in_tbs
+      - ATP_database_db_name
+      - ATP_database_db_version
+      - ATP_database_defined_tags_value
+      - ATP_database_display_name
+      - ATP_database_freeform_tags
+      - ATP_database_license_model
+      - ATP_tde_wallet_zip_file
+      - ATP_private_endpoint_label
 
     variables:
       
-       compartment_ocid:
+      compartment_ocid:
         type: oci:identity:compartment:id
         required: true
         visibile: true
@@ -166,7 +165,6 @@
         type: string
         required: false
         description: "ATP Database Defined Tags"
-
 
     outputs:
       loadbalancer_public_pl:
