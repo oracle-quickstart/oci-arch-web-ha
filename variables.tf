@@ -8,8 +8,8 @@ variable "user_ocid" {}
 variable "fingerprint" {}
 variable "private_key_path" {}
 variable "region" {}
-variable "ssh_public_key" {}
-variable "ssh_private_key" {}
+#variable "ssh_public_key" {}
+#variable "ssh_private_key" {}
 variable "ATP_password" {}
 
 # Specify any Default Value's here
@@ -38,11 +38,6 @@ variable "instance_shape" {
 we are specifying username's and password's to be used here for the app. 
 However specify the username and password of your choice if you want to change it.
 */
-
-variable "db_system_shape" {
-  default = "VM.Standard2.1"
-}
-
 
 variable "ATP_database_cpu_core_count" {
   default = 1

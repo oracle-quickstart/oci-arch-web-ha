@@ -25,7 +25,7 @@ resource "oci_core_instance" "compute_instance1" {
   }
 
   metadata = {
-    ssh_authorized_keys = chomp(file(var.ssh_public_key))
+    ssh_authorized_keys = tls_private_key.public_private_key_pair.public_key_openssh
   }
 
   timeouts {
@@ -53,7 +53,7 @@ resource "oci_core_instance" "compute_instance2" {
   }
 
   metadata = {
-    ssh_authorized_keys = chomp(file(var.ssh_public_key))
+    ssh_authorized_keys = tls_private_key.public_private_key_pair.public_key_openssh
   }
 
   timeouts {
