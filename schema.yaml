@@ -93,7 +93,7 @@
         type: oci:core:instanceos:name
         required: true
         title: "Instance OS"
-        description: "An Oper"ating System that determines the operating system for the instance."
+        description: "An Operating System that determines the operating system for the instance."
         default: "Oracle Linux"
         dependsOn:
           compartmentId: ${compartment_ocid}
