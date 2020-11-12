@@ -9,7 +9,7 @@ resource "null_resource" "compute-script1" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance1.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -46,7 +46,7 @@ resource "null_resource" "compute-script1" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance1.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -60,7 +60,7 @@ resource "null_resource" "compute-script1" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance1.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -74,7 +74,7 @@ resource "null_resource" "compute-script1" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance1.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -88,7 +88,7 @@ resource "null_resource" "compute-script1" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance1.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -102,7 +102,7 @@ resource "null_resource" "compute-script1" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance1.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -128,7 +128,7 @@ resource "null_resource" "compute-script1" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance1.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -142,7 +142,7 @@ resource "null_resource" "compute-script1" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance1.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -160,7 +160,7 @@ resource "null_resource" "compute-script1" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance1.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -180,7 +180,7 @@ resource "null_resource" "compute-script1" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance1.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -205,7 +205,7 @@ resource "null_resource" "compute-script2" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance2.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -241,7 +241,7 @@ resource "null_resource" "compute-script2" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance2.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -255,7 +255,7 @@ resource "null_resource" "compute-script2" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance2.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -269,7 +269,7 @@ resource "null_resource" "compute-script2" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance2.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -283,7 +283,7 @@ resource "null_resource" "compute-script2" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance2.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -297,7 +297,7 @@ resource "null_resource" "compute-script2" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance2.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -323,7 +323,7 @@ resource "null_resource" "compute-script2" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance2.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -337,7 +337,7 @@ resource "null_resource" "compute-script2" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance2.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -355,7 +355,7 @@ resource "null_resource" "compute-script2" {
       type        = "ssh"
       user        = "opc"
       host        = oci_core_instance.compute_instance2.public_ip
-      private_key = chomp(file(var.ssh_private_key))
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
