@@ -1,4 +1,4 @@
-output "loadbalancer_public_pl" {
+output "loadbalancer_public_ips" {
   value = [oci_load_balancer.lb1.ip_addresses]
 }
 
