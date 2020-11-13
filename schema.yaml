@@ -59,8 +59,9 @@
         type: oci:identity:availabilitydomain:name
         dependsOn:
         compartmentId: ${compartment_ocid}
-        title: "Availability Domain to be chosen."
-        description: "Availability Domain to be chosen."
+        title: "Availability Domain to be chosen"
+        description: "Availability Domain to be chosen"
+        default: "2"
 
       ATP_password:
         type: password
