@@ -17,5 +17,23 @@
       visible: true  
       variables:
       - ATP_password
+      - ATP_data_guard_enabled
       - compartment_ocid
-      - region
+      - region 
+
+    - title: Optional Configuration
+      visible: true
+      variables:
+      - instance_os
+      - instance_shape
+      - linux_os_version 
+      - ATP_database_cpu_core_count
+      - ATP_database_data_storage_size_in_tbs
+      - ATP_database_db_name
+      - ATP_database_db_version
+      - ATP_database_defined_tags_value
+      - ATP_database_display_name
+      - ATP_database_freeform_tags
+      - ATP_database_license_model
+      - ATP_tde_wallet_zip_file
+      - ATP_private_endpoint_label
