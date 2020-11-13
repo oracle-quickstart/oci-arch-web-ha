@@ -159,12 +159,6 @@
 
     outputs:
 
-      loadbalancer_public_url:
-      title: "LoadBalancer Public URL"
-      displayText: "LoadBalancer Public URL"
-      type: string
-      visible: true
-
       generated_ssh_private_key:
       title: "Generated SSH Private Key"
       displayText: "Generated SSH Private Key"
