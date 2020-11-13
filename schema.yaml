@@ -155,3 +155,16 @@
         type: string
         required: false
         description: "ATP Database Defined Tags"
+
+    outputs:
+      loadbalancer_public_pl:
+      title: "LoadBalancer Public IP"
+      displayText: "LoadBalancer Public IP"
+      type: copyableString
+      visible: true
+       
+      generated_ssh_private_key:
+      title: "Generated SSH Private Key"
+      displayText: "Generated SSH Private Key"
+      type: copyableString
+      visible: true
