@@ -19,7 +19,8 @@
       - ATP_password
       - ATP_data_guard_enabled
       - compartment_ocid
-      - region 
+      - region
+      - availability_domain 
 
     - title: Optional Configuration
       visible: true
