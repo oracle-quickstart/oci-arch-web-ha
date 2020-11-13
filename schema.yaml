@@ -56,9 +56,9 @@
         description: "Region where you want to deploy the resources defined by this stack."
 
       availability_domain:
-        type: oci:identity:availabilitydomain:name
-        dependsOn:
-        compartmentId: ${compartment_ocid}
+        type: string
+        required: true
+        visibile: true
         title: "Availability Domain to be chosen"
         description: "Availability Domain to be chosen"
         default: "2"
