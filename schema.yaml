@@ -38,3 +38,40 @@
       - ATP_database_license_model
       - ATP_tde_wallet_zip_file
       - ATP_private_endpoint_label
+
+    variables:
+      
+      compartment_ocid:
+        type: oci:identity:compartment:id
+        required: true
+        visibile: true
+        title: Compartment
+        description: "Compartment where you want to create the solution resources"
+
+      region:
+        type: oci:identity:region:name
+        required: true
+        visibile: true
+        title: Region
+        description: "Region where you want to deploy the resources defined by this stack."
+
+      availability_domain:
+        type: string
+        required: true
+        visibile: true
+        title: "Availability Domain to be chosen."
+        description: "Availability Domain to be chosen."
+
+      ATP_password:
+        type: password
+        required: true
+        visibile: true
+        title: "ATP Database Password for ADMIN user."
+        description: "ATP Database Password for ADMIN user."
+
+      ATP_data_guard_enabled:
+        type: boolean
+        required: true
+        visibile: true
+        default: false
+        description: "ATP Database DataGuard Enabled"   
