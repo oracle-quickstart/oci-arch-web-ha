@@ -75,3 +75,83 @@
         visibile: true
         default: false
         description: "ATP Database DataGuard Enabled"   
+
+      # Optional Configuration      
+      instance_shape:
+        type: string
+        required: false
+        title: "Instance Shape"
+        description: "A shape is a template that determines the number of CPUs, amount of memory, and other resources allocated to a newly created instance."
+        default: "VM.Standard2.1"
+      
+      instance_os:
+        type: string
+        required: false
+        title: "Instance OS"
+        description: "An Operating System that determines the operating system for the instance."
+        default: "Oracle Linux"
+      
+      linux_os_version:
+        type: string
+        required: false
+        title: "Instance OS version"
+        description: "An Operating System version that determines the operating system version for the instance."
+        default: "7.8"
+      
+      ATP_database_cpu_core_count:
+        type: number
+        required: false
+        default: 1
+        description: "ATP Database CPU Core Count"
+
+      ATP_database_data_storage_size_in_tbs:
+        type: number
+        required: false
+        default: 1
+        description: "ATP Database Data Storage Size in terabytes"
+
+      ATP_database_db_name:
+        type: string
+        required: false
+        default: "atpdb1"
+        description: "ATP Database DBNAME"
+
+      ATP_database_db_version:
+        type: string
+        required: false
+        default: "19c"
+        description: "ATP Database Version"
+
+      ATP_database_display_name:
+        type: string
+        required: false
+        default: "ATPDB"
+        description: "ATP Database Display Name"
+
+      ATP_database_license_model:
+        type: string
+        required: false
+        default: "LICENSE_INCLUDED"
+        description: "ATP Database License Model"
+
+      ATP_tde_wallet_zip_file:
+        type: string
+        required: false
+        default: "tde_wallet_ATPdb1.zip"
+        description: "ATP Database TDE Wallet ZIP File"
+      
+      ATP_private_endpoint_label:
+        type: string
+        required: false
+        default: "ATPPrivateEndpoint"
+        description: "ATP Database Private Endpoint Label"
+
+      ATP_database_freeform_tags:
+        type: string
+        required: false
+        description: "ATP Database Freeform Tags"
+
+      ATP_database_defined_tags_value:
+        type: string
+        required: false
+        description: "ATP Database Defined Tags"
