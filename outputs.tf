@@ -1,5 +1,5 @@
-output "loadbalancer_public_ips" {
-  value = [oci_load_balancer.lb1.ip_addresses]
+output "loadbalancer_public_url" {
+  value = "http://${oci_load_balancer.lb1.ip_addresses[0]}"
 }
 
 output "generated_ssh_private_key" {

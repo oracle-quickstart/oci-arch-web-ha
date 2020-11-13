@@ -10,7 +10,6 @@ resource "oci_core_instance" "compute_instance1" {
   compartment_id      = var.compartment_ocid
   display_name        = "Web-Server-1"
   shape               = var.instance_shape
-  subnet_id           = oci_core_subnet.subnet_2.id
   fault_domain        = "FAULT-DOMAIN-1"
 
   source_details {
@@ -38,7 +37,6 @@ resource "oci_core_instance" "compute_instance2" {
   compartment_id      = var.compartment_ocid
   display_name        = "Web-Server-2"
   shape               = var.instance_shape
-  subnet_id           = oci_core_subnet.subnet_2.id
   fault_domain        = "FAULT-DOMAIN-2"
 
   source_details {
