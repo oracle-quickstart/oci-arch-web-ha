@@ -2,7 +2,7 @@
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 resource "null_resource" "compute-script1" {
-  depends_on = [oci_core_instance.compute_instance1, oci_database_autonomous_database.ATPdatabase]
+  depends_on = [oci_core_instance.compute_instance1, oci_database_autonomous_database.ATPdatabase, oci_core_network_security_group_security_rule.ATPSecurityEgressGroupRule, oci_core_network_security_group_security_rule.ATPSecurityIngressGroupRules]
   
   provisioner "remote-exec" {
     connection {
@@ -192,8 +192,15 @@ resource "null_resource" "compute-script1" {
       "sudo -u root sed -i 's/ATP_password/${var.ATP_password}/g' /home/opc/app.py",
       "sudo -u root sed -i 's/ATP_alias/${var.ATP_database_db_name}_medium/g' /home/opc/app.py",
       "sudo -u root nohup /home/opc/app.sh > /home/opc/app.log &",
+      "echo 'nohup /home/opc/app.sh > /home/opc/app.log &' | sudo tee -a  /etc/rc.d/rc.local",
+      "sudo -u root chmod +x /etc/rc.d/rc.local",
+      "sudo -u root systemctl enable rc-local",
+      "sudo -u root systemctl status rc-local.service",
+      "sudo -u root systemctl start rc-local",
+      "sudo -u root systemctl stop firewalld",
+      "sudo -u root systemctl disable firewalld",
       "sleep 5",
-    "sudo -u root ps -ef | grep app"]
+      "sudo -u root ps -ef | grep app"]
   }
 }
 
@@ -367,8 +374,15 @@ resource "null_resource" "compute-script2" {
       "sudo -u root sed -i 's/ATP_password/${var.ATP_password}/g' /home/opc/app.py",
       "sudo -u root sed -i 's/ATP_alias/${var.ATP_database_db_name}_medium/g' /home/opc/app.py",
       "sudo -u root nohup /home/opc/app.sh > /home/opc/app.log &",
+      "echo 'nohup /home/opc/app.sh > /home/opc/app.log &' | sudo tee -a  /etc/rc.d/rc.local",
+      "sudo -u root chmod +x /etc/rc.d/rc.local",
+      "sudo -u root systemctl enable rc-local",
+      "sudo -u root systemctl status rc-local.service",
+      "sudo -u root systemctl start rc-local",
+      "sudo -u root systemctl stop firewalld",
+      "sudo -u root systemctl disable firewalld",
       "sleep 5",
-    "sudo -u root ps -ef | grep app"]
+      "sudo -u root ps -ef | grep app"]
   }
 }
 
