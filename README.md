@@ -43,10 +43,6 @@ Now, you'll want a local copy of this repo. You can make that with the commands:
     cd oci-arch-web-ha
     ls
 
-### Set Up and Configure Terraform
-
-1. Complete the prerequisites described [here](https://github.com/cloud-partners/oci-prerequisites).
-
 2. Create a `terraform.tfvars` file, and specify the following variables:
 
 ```
@@ -66,6 +62,10 @@ ATP_data_guard_enabled = false # set the value to true only when you want to ena
 
 # Region
 region = "<oci_region>"
+
+# database (only for ATP branch)
+ATP_password           = "<ATP_user_password>"
+ATP_data_guard_enabled = false # set the value to true only when you want to enable standby and then re-run terraform apply
 
 # Compartment
 compartment_ocid = "<compartment_ocid>"
