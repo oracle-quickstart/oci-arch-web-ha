@@ -10,17 +10,21 @@ resource "oci_core_instance" "compute_instance1" {
   compartment_id      = var.compartment_ocid
   display_name        = "Web-Server-1"
   shape               = var.instance_shape
-  subnet_id           = oci_core_subnet.subnet_2.id
   fault_domain        = "FAULT-DOMAIN-1"
 
-source_details {
+  source_details {
     source_type             = "image"
     source_id               = data.oci_core_images.InstanceImageOCID.images[0].id
     boot_volume_size_in_gbs = "50"
   }
 
+  create_vnic_details {
+     subnet_id = oci_core_subnet.subnet_2.id
+     nsg_ids = [oci_core_network_security_group.WebSecurityGroup.id, oci_core_network_security_group.SSHSecurityGroup.id]
+  }
+
   metadata = {
-    ssh_authorized_keys = chomp(file(var.ssh_public_key))
+    ssh_authorized_keys = tls_private_key.public_private_key_pair.public_key_openssh
   }
 
   timeouts {
@@ -33,17 +37,21 @@ resource "oci_core_instance" "compute_instance2" {
   compartment_id      = var.compartment_ocid
   display_name        = "Web-Server-2"
   shape               = var.instance_shape
-  subnet_id           = oci_core_subnet.subnet_2.id
   fault_domain        = "FAULT-DOMAIN-2"
 
-source_details {
+  source_details {
     source_type             = "image"
     source_id               = data.oci_core_images.InstanceImageOCID.images[0].id
     boot_volume_size_in_gbs = "50"
   }
 
+  create_vnic_details {
+     subnet_id = oci_core_subnet.subnet_2.id
+     nsg_ids = [oci_core_network_security_group.WebSecurityGroup.id, oci_core_network_security_group.SSHSecurityGroup.id]
+  }
+
   metadata = {
-    ssh_authorized_keys = chomp(file(var.ssh_public_key))
+    ssh_authorized_keys = tls_private_key.public_private_key_pair.public_key_openssh
   }
 
   timeouts {

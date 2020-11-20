@@ -1,176 +1,172 @@
+## Copyright © 2020, Oracle and/or its affiliates. 
+## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
-    # Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
-    # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
-
-    title: "Highly available three-tier web application"
-    stackDescription: Deploy a highly available sample flask web application
+    title: "Create highly available three-tier web application in Oracle Cloud Infrastructure"
+    stackDescription: "Deploy a highly available three-tier web application in Oracle Cloud Infrastructure."
     schemaVersion: 1.1.0
-    version: "20200601"
+    version: "20190404"
     locale: "en"
 
     variableGroups:
-      - title: General Configuration
-        visible: false
-        variables:
-        - compartment_ocid
-        - tenancy_ocid
-        - region
-        - availability_domain
-        - instance_os
-        - instance_shape
-        - linux_os_version
-        - db_system_shape
-        - db_edition
-        - db_version
-        - data_storage_size_in_gb
-        - node_count
+    - title: General Configuration
+      visible: false
+      variables:
+      - tenancy_ocid
 
-      - title: Required Configuration
-        visible: true  
-        variables:
-        - db_name
-        - db_admin_password
-        - hostname
+    - title: Required Configuration
+      visible: true  
+      variables:
+      - ATP_password
+      - ATP_data_guard_enabled
+      - compartment_ocid
+      - region
+      - availability_domain 
 
-      - title: Optional Configuration
-        visible: true
-        variables:
-        - ssh_public_key
+    - title: Optional Configuration
+      visible: true
+      variables:
+      - instance_os
+      - instance_shape
+      - linux_os_version 
+      - ATP_database_cpu_core_count
+      - ATP_database_data_storage_size_in_tbs
+      - ATP_database_db_name
+      - ATP_database_db_version
+      - ATP_database_defined_tags_value
+      - ATP_database_display_name
+      - ATP_database_freeform_tags
+      - ATP_database_license_model
+      - ATP_tde_wallet_zip_file
+      - ATP_private_endpoint_label
 
     variables:
       
       compartment_ocid:
         type: oci:identity:compartment:id
-        # type: string
         required: true
+        visibile: true
         title: Compartment
-        description: Compartment where you want to create the solution resources
+        description: "Compartment where you want to create the solution resources"
+
+      region:
+        type: oci:identity:region:name
+        required: true
+        visibile: true
+        title: Region
+        description: "Region where you want to deploy the resources defined by this stack."
 
       availability_domain:
-        type: oci:identity:availabilitydomain:name
-        dependsOn:
-          compartmentId: ${compartment_ocid}
+        type: string
         required: true
-        title: Availability Domain
-        description: Availability Domain
-        default: "3"
-      
-      region:
-        type: enum
+        visibile: true
+        title: "Availability Domain to be chosen"
+        description: "Availability Domain to be chosen"
+        default: "2"
+
+      ATP_password:
+        type: password
         required: true
-        title: Region
-        description: Region where you want to deploy the resources defined by this stack
-        default: "us-ashburn-1"
-        enum:
-          - "us-phoenix-1"
-          - "us-ashburn-1"
-          - "eu-frankfurt-1"
-          - "uk-london-1"
-          - "us-seattle-1"
-          - "r1"
-      
+        visibile: true
+        title: "ATP Database Password for ADMIN user."
+        description: "ATP Database Password for ADMIN user."
+
+      ATP_data_guard_enabled:
+        type: boolean
+        required: true
+        visibile: true
+        default: false
+        description: "ATP Database DataGuard Enabled"   
+
+      # Optional Configuration      
       instance_shape:
-        type: oci:core:instanceshape:name
-        required: true
-        title: Instance Shape
-        description: A shape is a template that determines the number of CPUs, amount of memory, and other resources allocated to a newly created instance.
+        type: string
+        required: false
+        title: "Instance Shape"
+        description: "A shape is a template that determines the number of CPUs, amount of memory, and other resources allocated to a newly created instance."
         default: "VM.Standard2.1"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
       
       instance_os:
-        type: oci:core:instanceos:name
-        required: true
-        title: Instance OS
-        description: An Operating System that determines the operating system for the instance.
+        type: string
+        required: false
+        title: "Instance OS"
+        description: "An Operating System that determines the operating system for the instance."
         default: "Oracle Linux"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
       
       linux_os_version:
-        type: oci:core:linuxosversion:name
-        required: true
-        title: Instance OS version
-        description: An Operating System version that determines the operating system version for the instance.
-        default: "7.7"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
-      
-      db_system_shape:
-        type: oci:core:dbsystemshape:name
-        required: true
-        title: Database Shape
-        description: A shape is a template that determines the number of CPUs, amount of memory, and other resources allocated to a newly created database instance.
-        default: "VM.Standard2.1"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
-      
-      db_version:
-        type: oci:core:dbversion:name
-        required: true
-        title: Database Version
-        description: The version for the database instance.
-        default: "12.1.0.2"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
-
-      db_edition:
-        type: oci:core:dbedition:name
-        required: true
-        title: Database edition
-        description: The edition for the database instance.
-        default: "ENTERPRISE_EDITION"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
-      
-      data_storage_size_in_gb:
-        type: oci:core:datastoragesizeingb:name
-        required: true
-        title: Database storage size
-        description: The storage required for the database instance.
-        default: "256"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
-      
-      node_count:
-        type: oci:core:nodecount:name
-        required: true
-        title: Database node size count
-        description: The number of nodes used for the database instance.
-        default: "1"
-        dependsOn:
-          compartmentId: ${compartment_ocid}
-      
-      db_name:
         type: string
-        required: true
-        title: Database Name
-        description: Name of the Database instance
-        default: "aTFdb"
-        minLength: 1
-        maxLength: 14
-      
-      db_admin_password:
-        type: string
-        required: true
-        title: Database passowrd
-        description: password for of the Database instance
-        default: "BEstrO0ng_#12"
-        minLength: 1
-        maxLength: 14
-      
-      hostname:
-        type: string
-        required: true
-        title: Database hostname
-        description: hostname for of the Database instance
-        default: "myoracledb"
-        minLength: 1
-        maxLength: 14
-
-      ssh_public_key:
-        type: text
         required: false
-        title: SSH Public Key
-        description: A public key is used to authenticate to remote compute instances. Upload the public key now. When you connect, you will provide the associated private key.
-  
+        title: "Instance OS version"
+        description: "An Operating System version that determines the operating system version for the instance."
+        default: "7.8"
+      
+      ATP_database_cpu_core_count:
+        type: number
+        required: false
+        default: 1
+        description: "ATP Database CPU Core Count"
+
+      ATP_database_data_storage_size_in_tbs:
+        type: number
+        required: false
+        default: 1
+        description: "ATP Database Data Storage Size in terabytes"
+
+      ATP_database_db_name:
+        type: string
+        required: false
+        default: "atpdb1"
+        description: "ATP Database DBNAME"
+
+      ATP_database_db_version:
+        type: string
+        required: false
+        default: "19c"
+        description: "ATP Database Version"
+
+      ATP_database_display_name:
+        type: string
+        required: false
+        default: "ATPDB"
+        description: "ATP Database Display Name"
+
+      ATP_database_license_model:
+        type: string
+        required: false
+        default: "LICENSE_INCLUDED"
+        description: "ATP Database License Model"
+
+      ATP_tde_wallet_zip_file:
+        type: string
+        required: false
+        default: "tde_wallet_ATPdb1.zip"
+        description: "ATP Database TDE Wallet ZIP File"
+      
+      ATP_private_endpoint_label:
+        type: string
+        required: false
+        default: "ATPPrivateEndpoint"
+        description: "ATP Database Private Endpoint Label"
+
+      ATP_database_freeform_tags:
+        type: string
+        required: false
+        description: "ATP Database Freeform Tags"
+
+      ATP_database_defined_tags_value:
+        type: string
+        required: false
+        description: "ATP Database Defined Tags"
+
+    outputs:
+
+      generated_ssh_private_key:
+        title: "Generated SSH Private Key"
+        displayText: "Generated SSH Private Key"
+        type: copyableString
+        visible: true
+
+      loadbalancer_public_url:
+        title: "Loadbalancer Public URL"
+        displayText: "Loadbalancer Public URL"
+        type: string
+        visible: true

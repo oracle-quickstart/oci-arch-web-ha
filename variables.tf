@@ -8,8 +8,9 @@ variable "user_ocid" {}
 variable "fingerprint" {}
 variable "private_key_path" {}
 variable "region" {}
-variable "ssh_public_key" {}
-variable "ssh_private_key" {}
+#variable "ssh_public_key" {}
+#variable "ssh_private_key" {}
+variable "ATP_password" {}
 
 # Specify any Default Value's here
 
@@ -25,7 +26,7 @@ variable "instance_os" {
 
 variable "linux_os_version" {
   description = "Operating system version for all Linux instances"
-  default     = "7.7"
+  default     = "7.8"
 }
 
 variable "instance_shape" {
@@ -38,34 +39,48 @@ we are specifying username's and password's to be used here for the app.
 However specify the username and password of your choice if you want to change it.
 */
 
-variable "db_system_shape" {
-  default = "VM.Standard2.1"
+variable "ATP_database_cpu_core_count" {
+  default = 1
 }
 
-variable "db_edition" {
-  default = "ENTERPRISE_EDITION"
+variable "ATP_database_data_storage_size_in_tbs" {
+  default = 1
 }
 
-variable "db_admin_password" {
-  default = "BEstrO0ng_#12"
-}
-
-variable "db_name" {
+variable "ATP_database_db_name" {
   default = "aTFdb"
 }
 
-variable "db_version" {
-  default = "12.1.0.2"
+variable "ATP_database_db_version" {
+  default = "19c"
 }
 
-variable "hostname" {
-  default = "myoracledb"
+variable "ATP_database_defined_tags_value" {
+  default = "value"
 }
 
-variable "data_storage_size_in_gb" {
-  default = "256"
+variable "ATP_database_display_name" {
+  default = "ATP"
 }
 
-variable "node_count" {
-  default = "1"
+variable "ATP_database_freeform_tags" {
+  default = {
+    "Owner" = "ATP"
+  }
+}
+
+variable "ATP_database_license_model" {
+  default = "LICENSE_INCLUDED"
+}
+
+variable "ATP_tde_wallet_zip_file" {
+  default = "tde_wallet_aTFdb.zip"
+}
+
+variable "ATP_private_endpoint_label" {
+  default = "ATPPrivateEndpoint"
+}
+
+variable  "ATP_data_guard_enabled" {
+  default = false 
 }
