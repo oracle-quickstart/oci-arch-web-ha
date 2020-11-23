@@ -9,7 +9,7 @@ resource "oci_core_subnet" "subnet_1" {
   compartment_id    = var.compartment_ocid
   vcn_id            = oci_core_virtual_network.vcn.id
   dhcp_options_id   = oci_core_virtual_network.vcn.default_dhcp_options_id
-  route_table_id    = oci_core_route_table.rt.id
+  route_table_id    = oci_core_route_table.rt-pub.id
   dns_label         = "subnet1"
 
   provisioner "local-exec" {
@@ -23,7 +23,7 @@ resource "oci_core_subnet" "subnet_2" {
   compartment_id    = var.compartment_ocid
   vcn_id            = oci_core_virtual_network.vcn.id
   dhcp_options_id   = oci_core_virtual_network.vcn.default_dhcp_options_id
-  route_table_id    = oci_core_route_table.rt.id
+  route_table_id    = oci_core_route_table.rt-pub.id
   dns_label         = "subnet2"
   provisioner "local-exec" {
     command = "sleep 5"
@@ -36,7 +36,7 @@ resource "oci_core_subnet" "subnet_3" {
   compartment_id    = var.compartment_ocid
   vcn_id            = oci_core_virtual_network.vcn.id
   dhcp_options_id   = oci_core_virtual_network.vcn.default_dhcp_options_id
-  route_table_id    = oci_core_route_table.rt.id
+  route_table_id    = oci_core_route_table.rt-priv.id
   dns_label         = "subnet3"
   prohibit_public_ip_on_vnic = true
 
