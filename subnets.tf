@@ -38,6 +38,7 @@ resource "oci_core_subnet" "subnet_3" {
   dhcp_options_id   = oci_core_virtual_network.vcn.default_dhcp_options_id
   route_table_id    = oci_core_route_table.rt.id
   dns_label         = "subnet3"
+  prohibit_public_ip_on_vnic = true
 
   provisioner "local-exec" {
     command = "sleep 5"
