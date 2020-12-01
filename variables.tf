@@ -11,6 +11,10 @@ variable "region" {}
 variable "ATP_password" {}
 variable "availablity_domain_name" {}
 
+variable "lb_shape" {
+  default = "100Mbps"
+}
+
 # OS Images
 variable "instance_os" {
   description = "Operating system for compute instances"

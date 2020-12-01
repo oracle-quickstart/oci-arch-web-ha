@@ -25,6 +25,7 @@
     - title: Optional Configuration
       visible: true
       variables:
+      - lb_shape
       - instance_os
       - instance_shape
       - linux_os_version 
@@ -82,6 +83,19 @@
         description: "ATP Database DataGuard Enabled"   
 
       # Optional Configuration      
+      lb_shape:
+        type: enum
+        title: "Load Balanacer Shape"
+        description: "Load Balanacer Shape"
+        default: "100Mbps"
+        required: false 
+        enum:
+         - "100Mbps"
+         - "10Mbps"
+         - "10Mbps-Micro"
+         - "400Mbps"
+         - "8000Mbps"
+
       instance_shape:
         type: oci:core:instanceshape:name
         required: false

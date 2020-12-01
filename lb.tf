@@ -2,7 +2,8 @@
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 resource "oci_load_balancer" "lb1" {
-  shape          = "100Mbps"
+  #shape          = "100Mbps"
+  shape          = var.lb_shape
   compartment_id = var.compartment_ocid
 
   subnet_ids = [
