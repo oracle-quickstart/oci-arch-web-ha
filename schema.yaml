@@ -20,7 +20,7 @@
       - ATP_data_guard_enabled
       - compartment_ocid
       - region
-      - availability_domain 
+      - availablity_domain_name
 
     - title: Optional Configuration
       visible: true
@@ -55,13 +55,14 @@
         title: Region
         description: "Region where you want to deploy the resources defined by this stack."
 
-      availability_domain:
-        type: string
+      availablity_domain_name:
+        type: oci:identity:availabilitydomain:name
         required: true
         visibile: true
         title: "Availability Domain to be chosen"
         description: "Availability Domain to be chosen"
-        default: "2"
+        dependsOn:
+          compartmentId: ${compartment_ocid}
 
       ATP_password:
         type: password
@@ -69,6 +70,9 @@
         visibile: true
         title: "ATP Database Password for ADMIN user."
         description: "ATP Database Password for ADMIN user."
+        minLength: 12
+        maxLength: 30
+        pattern: ^[A-Za-z][A-Za-z0-9_#\$]+$ 
 
       ATP_data_guard_enabled:
         type: boolean
@@ -79,11 +83,13 @@
 
       # Optional Configuration      
       instance_shape:
-        type: string
+        type: oci:core:instanceshape:name
         required: false
         title: "Instance Shape"
         description: "A shape is a template that determines the number of CPUs, amount of memory, and other resources allocated to a newly created instance."
         default: "VM.Standard2.1"
+        dependsOn:
+          compartmentId: ${compartment_ocid}
       
       instance_os:
         type: string
@@ -102,12 +108,18 @@
       ATP_database_cpu_core_count:
         type: number
         required: false
+        minimum: 1
+        maximum: 128
+        multipleOf: 1
         default: 1
         description: "ATP Database CPU Core Count"
 
       ATP_database_data_storage_size_in_tbs:
         type: number
         required: false
+        minimum: 1
+        maximum: 128
+        multipleOf: 1
         default: 1
         description: "ATP Database Data Storage Size in terabytes"
 
@@ -118,10 +130,12 @@
         description: "ATP Database DBNAME"
 
       ATP_database_db_version:
-        type: string
+        type: enum
         required: false
         default: "19c"
         description: "ATP Database Version"
+        enum:
+          - "19c"
 
       ATP_database_display_name:
         type: string
@@ -130,10 +144,13 @@
         description: "ATP Database Display Name"
 
       ATP_database_license_model:
-        type: string
+        type: enum
         required: false
         default: "LICENSE_INCLUDED"
         description: "ATP Database License Model"
+        enum:
+          - "LICENSE_INCLUDED"
+          - "BRING_YOUR_OWN_LICENSE"
 
       ATP_tde_wallet_zip_file:
         type: string

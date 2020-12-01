@@ -63,9 +63,8 @@ ATP_data_guard_enabled = false # set the value to true only when you want to ena
 # Region
 region = "<oci_region>"
 
-# database (only for ATP branch)
-ATP_password           = "<ATP_user_password>"
-ATP_data_guard_enabled = false # set the value to true only when you want to enable standby and then re-run terraform apply
+# Availablity Domain 
+availablity_domain_name = "<availablity_domain_name>"
 
 # Compartment
 compartment_ocid = "<compartment_ocid>"

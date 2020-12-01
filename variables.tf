@@ -8,15 +8,8 @@ variable "user_ocid" {}
 variable "fingerprint" {}
 variable "private_key_path" {}
 variable "region" {}
-#variable "ssh_public_key" {}
-#variable "ssh_private_key" {}
 variable "ATP_password" {}
-
-# Specify any Default Value's here
-
-variable "availability_domain" {
-  default = "3"
-}
+variable "availablity_domain_name" {}
 
 # OS Images
 variable "instance_os" {
