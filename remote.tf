@@ -112,7 +112,7 @@ resource "null_resource" "compute-script1" {
   }
 
   provisioner "local-exec" {
-    command = "echo '${data.oci_database_autonomous_database_wallet.ATP_database_wallet.content}' >> ${var.ATP_tde_wallet_zip_file}_encoded"
+    command = "echo '${oci_database_autonomous_database_wallet.ATP_database_wallet.content}' >> ${var.ATP_tde_wallet_zip_file}_encoded"
   }
 
   provisioner "local-exec" {
@@ -314,7 +314,7 @@ resource "null_resource" "compute-script2" {
   }
 
   provisioner "local-exec" {
-    command = "echo '${data.oci_database_autonomous_database_wallet.ATP_database_wallet.content}' >> ${var.ATP_tde_wallet_zip_file}_encoded"
+    command = "echo '${oci_database_autonomous_database_wallet.ATP_database_wallet.content}' >> ${var.ATP_tde_wallet_zip_file}_encoded"
   }
 
   provisioner "local-exec" {

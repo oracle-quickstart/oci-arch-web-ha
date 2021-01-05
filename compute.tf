@@ -6,7 +6,6 @@
 # Create Compute Instance
 
 resource "oci_core_instance" "compute_instance1" {
-#  availability_domain = data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain - 2]["name"]
   availability_domain = var.availablity_domain_name
   compartment_id      = var.compartment_ocid
   display_name        = "Web-Server-1"
@@ -34,7 +33,6 @@ resource "oci_core_instance" "compute_instance1" {
 }
 
 resource "oci_core_instance" "compute_instance2" {
-#  availability_domain = data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain - 2]["name"]
   availability_domain = var.availablity_domain_name
   compartment_id      = var.compartment_ocid
   display_name        = "Web-Server-2"

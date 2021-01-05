@@ -31,11 +31,6 @@ variable "instance_shape" {
   default     = "VM.Standard2.1"
 }
 
-/*
-we are specifying username's and password's to be used here for the app. 
-However specify the username and password of your choice if you want to change it.
-*/
-
 variable "ATP_database_cpu_core_count" {
   default = 1
 }
