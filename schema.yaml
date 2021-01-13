@@ -12,6 +12,7 @@
       visible: false
       variables:
       - tenancy_ocid
+      - region
 
     - title: Required Configuration
       visible: true  
@@ -19,7 +20,6 @@
       - ATP_password
       - ATP_data_guard_enabled
       - compartment_ocid
-      - region
       - availablity_domain_name
 
     - title: Optional Configuration
