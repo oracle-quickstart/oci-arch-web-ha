@@ -11,6 +11,7 @@ resource "oci_core_route_table" "rt-pub" {
     cidr_block        = "0.0.0.0/0"
     network_entity_id = oci_core_internet_gateway.ig.id
   }
+  defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 resource "oci_core_route_table" "rt-priv" {
@@ -22,4 +23,5 @@ resource "oci_core_route_table" "rt-priv" {
         destination_type  = "CIDR_BLOCK"
         network_entity_id = oci_core_nat_gateway.nat_gw.id
     }
+    defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }

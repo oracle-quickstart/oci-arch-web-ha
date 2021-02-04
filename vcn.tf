@@ -8,4 +8,5 @@ resource "oci_core_virtual_network" "vcn" {
   compartment_id = var.compartment_ocid
   display_name   = "web-app-vcn"
   dns_label      = "tfexamplevcn"
+  defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }

@@ -15,6 +15,7 @@ resource "oci_database_autonomous_database" "ATPdatabase" {
   private_endpoint_label   = var.ATP_private_endpoint_label
   subnet_id                = oci_core_subnet.subnet_3.id    
   is_data_guard_enabled    = var.ATP_data_guard_enabled
+  defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 resource "random_string" "wallet_password" {

@@ -10,6 +10,8 @@ resource "oci_load_balancer" "lb1" {
     oci_core_subnet.subnet_1.id,
   ]
 
+  defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+
   display_name = "load-balancer"
   network_security_group_ids = [oci_core_network_security_group.LBSecurityGroup.id]
 }
