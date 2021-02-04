@@ -3,6 +3,12 @@ resource "oci_identity_tag_namespace" "ArchitectureCenterTagNamespace" {
     description = "ArchitectureCenterTagNamespace"
     name = "ArchitectureCenter\\ha-web-app"
   
+    # Required for longop of tag deletion in background (approximately 20 minutes)
+    provisioner "local-exec" {
+       when    = destroy
+       command = "sleep 1200"
+    }
+
     provisioner "local-exec" {
        command = "sleep 10"
     }
@@ -22,9 +28,4 @@ resource "oci_identity_tag" "ArchitectureCenterTag" {
        command = "sleep 20"
     }
 
-    # Required for longop of tag deletion in background 
-    provisioner "local-exec" {
-       when    = destroy
-       command = "sleep 1200"
-    }
 }
