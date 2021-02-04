@@ -11,6 +11,11 @@ variable "region" {}
 variable "ATP_password" {}
 variable "availablity_domain_name" {}
 
+variable "release" {
+  description = "Reference Architecture Release (OCI Architecture Center)"
+  default     = "1.0"
+}
+
 variable "lb_shape" {
   default = "100Mbps"
 }

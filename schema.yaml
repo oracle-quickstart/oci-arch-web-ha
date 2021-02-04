@@ -39,6 +39,7 @@
       - ATP_database_license_model
       - ATP_tde_wallet_zip_file
       - ATP_private_endpoint_label
+      - release
 
     variables:
       
@@ -187,6 +188,12 @@
         type: string
         required: false
         description: "ATP Database Defined Tags"
+      
+      release:
+        type: string
+        required: false
+        visible: false
+        title: "Reference Architecture Release (OCI Architecture Center)"
 
     outputs:
 
