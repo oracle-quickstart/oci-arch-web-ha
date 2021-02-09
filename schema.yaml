@@ -107,18 +107,23 @@
           compartmentId: ${compartment_ocid}
       
       instance_os:
-        type: string
+        type: enum
         required: false
         title: "Instance OS"
         description: "An Operating System that determines the operating system for the instance."
         default: "Oracle Linux"
+        enum:
+          - "Oracle Linux"
       
       linux_os_version:
-        type: string
+        type: enum
         required: false
         title: "Instance OS version"
         description: "An Operating System version that determines the operating system version for the instance."
-        default: "7.8"
+        default: "7.9"
+        enum: 
+          - "7.8"
+          - "7.9"
       
       ATP_database_cpu_core_count:
         type: number
