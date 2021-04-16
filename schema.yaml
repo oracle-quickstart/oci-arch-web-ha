@@ -13,22 +13,44 @@
       variables:
       - tenancy_ocid
       - region
+      - release
 
     - title: Required Configuration
       visible: true  
       variables:
       - ATP_password
-      - ATP_data_guard_enabled
       - compartment_ocid
       - availablity_domain_name
+      - show_advanced
 
-    - title: Optional Configuration
-      visible: true
+    - title: Load Balancer Optional Configuration
+      visible: 
+          and:
+            - show_advanced
       variables:
       - lb_shape
+      - flex_lb_min_shape
+      - flex_lb_max_shape 
+
+    - title: Compute Optional Configuration
+      visible: 
+          and:
+            - show_advanced
+      variables:
+      - ssh_public_key
       - instance_os
-      - instance_shape
       - linux_os_version 
+      - instance_shape
+      - instance_flex_shape_ocpus
+      - instance_flex_shape_memory
+
+    - title: ATP Optional Configuration
+      visible: 
+          and:
+            - show_advanced
+      variables:
+      - ATP_private_endpoint  
+      - ATP_data_guard_enabled
       - ATP_database_cpu_core_count
       - ATP_database_data_storage_size_in_tbs
       - ATP_database_db_name
@@ -39,9 +61,15 @@
       - ATP_database_license_model
       - ATP_tde_wallet_zip_file
       - ATP_private_endpoint_label
-      - release
 
     variables:
+
+      show_advanced:
+        type: boolean
+        title: "Show advanced options?"
+        description: "Shows advanced options."
+        visible: true
+        default: false
       
       compartment_ocid:
         type: oci:identity:compartment:id
@@ -76,35 +104,111 @@
         maxLength: 30
         pattern: ^[A-Za-z][A-Za-z0-9_#\$]+$ 
 
-      ATP_data_guard_enabled:
-        type: boolean
-        required: true
-        visibile: true
-        default: false
-        description: "ATP Database DataGuard Enabled"   
 
       # Optional Configuration      
       lb_shape:
         type: enum
         title: "Load Balanacer Shape"
         description: "Load Balanacer Shape"
-        default: "100Mbps"
+        default: "flexible"
         required: false 
         enum:
-         - "100Mbps"
-         - "10Mbps"
-         - "10Mbps-Micro"
-         - "400Mbps"
-         - "8000Mbps"
+          - "flexible"
+          - "100Mbps"
+          - "10Mbps"
+          - "10Mbps-Micro"
+          - "400Mbps"
+          - "8000Mbps"
+
+      flex_lb_min_shape:
+        type: enum
+        required: false
+        default: "10"
+        title: "LB Flex Min Shape"
+        description: "Choose Minimum Shape for Flex Load Balancer."
+        enum:
+          - "10"
+          - "100"
+          - "1000"
+          - "400"
+          - "8000"
+        visible:
+          and:
+            - eq:
+              - lb_shape 
+              - "flexible"
+
+
+      flex_lb_max_shape:
+        type: enum
+        required: false
+        default: "100"
+        title: "LB Flex Max Shape"
+        description: "Choose Maximum Shape for Flex Load Balancer."
+        enum:
+          - "10"
+          - "100"
+          - "1000"
+          - "400"
+          - "8000"
+        visible:
+          and:
+            - eq:
+              - lb_shape 
+              - "flexible"
+
+      ssh_public_key:
+        type: oci:core:ssh:publickey
+        title: "Public SSH Key"
+        description: "Choose public SSH Key to be uploaded into compute instances."
+        required: false
 
       instance_shape:
         type: oci:core:instanceshape:name
         required: false
         title: "Instance Shape"
         description: "A shape is a template that determines the number of CPUs, amount of memory, and other resources allocated to a newly created instance."
-        default: "VM.Standard2.1"
+        default: "VM.Standard.E3.Flex"
         dependsOn:
           compartmentId: ${compartment_ocid}
+
+      instance_flex_shape_ocpus:
+        type: number
+        required: false
+        minimum: 1
+        maximum: 128
+        multipleOf: 1
+        default: 1
+        title: "Flex Shape OCPUs"
+        description: "Choose number of OCPUs for Flex Shape."
+        visible:
+          and:
+            - or:
+              - eq:
+                - instance_shape 
+                - "VM.Standard.E3.Flex"
+              - eq:
+                - instance_shape 
+                - "VM.Standard.E4.Flex"
+
+      instance_flex_shape_memory:
+        type: number
+        required: false
+        minimum: 1
+        maximum: 128
+        multipleOf: 1
+        default: 10
+        title: "Flex Shape Memory (GB)"
+        description: "Choose number GB for Flex Shape Memory."
+        visible:
+          and:
+            - or:
+              - eq:
+                - instance_shape 
+                - "VM.Standard.E3.Flex"
+              - eq:
+                - instance_shape
+                - "VM.Standard.E4.Flex"
       
       instance_os:
         type: enum
@@ -124,7 +228,23 @@
         enum: 
           - "7.8"
           - "7.9"
-      
+
+      ATP_private_endpoint:
+        type: boolean
+        visibile: true
+        default: false
+        required: false
+        title: "ATP Database Private Endpoint"
+        description: "Check the box to deploy ATP Database with Private Endpoint."
+
+      ATP_data_guard_enabled:
+        type: boolean
+        required: true
+        visibile: true
+        default: false
+        title: "ATP Database DataGuard" 
+        description: "Check the box to enable ATP Database DataGuard." 
+
       ATP_database_cpu_core_count:
         type: number
         required: false
@@ -132,7 +252,8 @@
         maximum: 128
         multipleOf: 1
         default: 1
-        description: "ATP Database CPU Core Count"
+        title: "ATP Database CPU Core Count"
+        description: "Choose ATP Database CPU Core Count."
 
       ATP_database_data_storage_size_in_tbs:
         type: number
@@ -141,19 +262,22 @@
         maximum: 128
         multipleOf: 1
         default: 1
-        description: "ATP Database Data Storage Size in terabytes"
+        title: "ATP Database Data Storage Size (TB)"
+        description: "Choose ATP Database Data Storage Size in terabytes."
 
       ATP_database_db_name:
         type: string
         required: false
         default: "atpdb1"
-        description: "ATP Database DBNAME"
+        title: "ATP Database DBNAME"
+        description: "Choose ATP Database DBNAME."
 
       ATP_database_db_version:
         type: enum
         required: false
         default: "19c"
-        description: "ATP Database Version"
+        title: "ATP Database Version"
+        description: "Choose ATP Database Version."
         enum:
           - "19c"
 
@@ -161,13 +285,15 @@
         type: string
         required: false
         default: "ATPDB"
-        description: "ATP Database Display Name"
+        title: "ATP Database Display Name"
+        description: "Choose ATP Database Display Name."
 
       ATP_database_license_model:
         type: enum
         required: false
         default: "LICENSE_INCLUDED"
-        description: "ATP Database License Model"
+        title: "ATP Database License Model"
+        description: "Choose ATP Database License Model."
         enum:
           - "LICENSE_INCLUDED"
           - "BRING_YOUR_OWN_LICENSE"
@@ -175,24 +301,32 @@
       ATP_tde_wallet_zip_file:
         type: string
         required: false
+        visible: false
         default: "tde_wallet_ATPdb1.zip"
-        description: "ATP Database TDE Wallet ZIP File"
+        title: "ATP Database TDE Wallet ZIP File"
+        description: "Choose ATP Database TDE Wallet ZIP File."
       
       ATP_private_endpoint_label:
         type: string
         required: false
+        visible: 
+            and:
+              - ATP_private_endpoint
         default: "ATPPrivateEndpoint"
-        description: "ATP Database Private Endpoint Label"
+        title: "ATP Database Private Endpoint Label"
+        description: "Choose ATP Database Private Endpoint Label"
 
       ATP_database_freeform_tags:
         type: string
         required: false
-        description: "ATP Database Freeform Tags"
+        title: "ATP Database Freeform Tags"
+        description: "Choose ATP Database Freeform Tags"
 
       ATP_database_defined_tags_value:
         type: string
         required: false
-        description: "ATP Database Defined Tags"
+        title: "ATP Database Defined Tags"
+        description: "Choose ATP Database Defined Tags"
       
       release:
         type: string

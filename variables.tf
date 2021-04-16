@@ -13,11 +13,23 @@ variable "availablity_domain_name" {}
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.0"
+  default     = "1.1"
+}
+
+variable "ssh_public_key" {
+  default = ""
 }
 
 variable "lb_shape" {
-  default = "100Mbps"
+  default = "flexible"
+}
+
+variable "flex_lb_min_shape" {
+  default = "10"
+}
+
+variable "flex_lb_max_shape" {
+  default = "100"
 }
 
 # OS Images
@@ -32,8 +44,19 @@ variable "linux_os_version" {
 }
 
 variable "instance_shape" {
-  description = "Instance Shape"
-  default     = "VM.Standard2.1"
+   default = "VM.Standard.E3.Flex"
+}
+
+variable "instance_flex_shape_ocpus" {
+    default = 1
+}
+
+variable "instance_flex_shape_memory" {
+    default = 10
+}
+
+variable "ATP_private_endpoint" {
+  default = true
 }
 
 variable "ATP_database_cpu_core_count" {
@@ -80,4 +103,17 @@ variable "ATP_private_endpoint_label" {
 
 variable  "ATP_data_guard_enabled" {
   default = false 
+}
+
+# Dictionary Locals
+locals {
+  compute_flexible_shapes = [
+    "VM.Standard.E3.Flex",
+    "VM.Standard.E4.Flex"
+  ]
+}
+
+# Checks if is using Flexible Compute Shapes
+locals {
+  is_flexible_node_shape = contains(local.compute_flexible_shapes, var.instance_shape)
 }
