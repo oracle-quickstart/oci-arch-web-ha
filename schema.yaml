@@ -138,7 +138,6 @@
               - lb_shape 
               - "flexible"
 
-
       flex_lb_max_shape:
         type: enum
         required: false
