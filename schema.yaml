@@ -108,8 +108,8 @@
       # Optional Configuration      
       lb_shape:
         type: enum
-        title: "Load Balanacer Shape"
-        description: "Load Balanacer Shape"
+        title: "Load Balancer Shape"
+        description: "Load Balancer Shape"
         default: "flexible"
         required: false 
         enum:
