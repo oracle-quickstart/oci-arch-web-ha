@@ -4,7 +4,7 @@
 # This Terraform script provisions a compute instance
 
 data "template_file" "key_script" {
-  template = file("./scripts/sshkey.tpl")
+  template = file("${path.module}/scripts/sshkey.tpl")
   vars = {
     ssh_public_key = tls_private_key.public_private_key_pair.public_key_openssh
   }
@@ -24,11 +24,14 @@ data "template_cloudinit_config" "cloud_init" {
 # Create Compute Instance
 
 resource "oci_core_instance" "compute_instance1" {
-  availability_domain = var.availablity_domain_name
+  availability_domain = local.availability_domain_name
   compartment_id      = var.compartment_ocid
   display_name        = "Web-Server-1"
   shape               = var.instance_shape
-
+  lifecycle {
+    ignore_changes = [ defined_tags["Oracle-Tags.CreatedBy"], defined_tags["Oracle-Tags.CreatedOn"] ]
+  }
+  
   dynamic "shape_config" {
     for_each = local.is_flexible_node_shape ? [1] : []
     content {
@@ -46,12 +49,12 @@ resource "oci_core_instance" "compute_instance1" {
   }
 
   create_vnic_details {
-     subnet_id = oci_core_subnet.subnet_2.id
-     nsg_ids = [oci_core_network_security_group.WebSecurityGroup.id, oci_core_network_security_group.SSHSecurityGroup.id]
+    subnet_id = oci_core_subnet.subnet_2.id
+    nsg_ids = [oci_core_network_security_group.WebSecurityGroup.id, oci_core_network_security_group.SSHSecurityGroup.id]
   }
 
   metadata = {
-    ssh_authorized_keys = var.ssh_public_key
+    ssh_authorized_keys = file(var.ssh_public_key_path)
     user_data = data.template_cloudinit_config.cloud_init.rendered
   }
 
@@ -63,11 +66,14 @@ resource "oci_core_instance" "compute_instance1" {
 }
 
 resource "oci_core_instance" "compute_instance2" {
-  availability_domain = var.availablity_domain_name
+  availability_domain = local.availability_domain_name
   compartment_id      = var.compartment_ocid
   display_name        = "Web-Server-2"
   shape               = var.instance_shape
-
+  lifecycle {
+    ignore_changes = [ defined_tags["Oracle-Tags.CreatedBy"], defined_tags["Oracle-Tags.CreatedOn"] ]
+  }
+  
   dynamic "shape_config" {
     for_each = local.is_flexible_node_shape ? [1] : []
     content {
@@ -85,12 +91,12 @@ resource "oci_core_instance" "compute_instance2" {
   }
 
   create_vnic_details {
-     subnet_id = oci_core_subnet.subnet_2.id
-     nsg_ids = [oci_core_network_security_group.WebSecurityGroup.id, oci_core_network_security_group.SSHSecurityGroup.id]
+    subnet_id = oci_core_subnet.subnet_2.id
+    nsg_ids = [oci_core_network_security_group.WebSecurityGroup.id, oci_core_network_security_group.SSHSecurityGroup.id]
   }
 
   metadata = {
-    ssh_authorized_keys = var.ssh_public_key
+    ssh_authorized_keys = file(var.ssh_public_key_path)
     user_data = data.template_cloudinit_config.cloud_init.rendered
   }
 

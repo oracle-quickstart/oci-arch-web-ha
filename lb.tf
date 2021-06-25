@@ -7,7 +7,10 @@ locals {
 
 resource "oci_load_balancer" "lb1" {
   shape          = var.lb_shape
-
+  lifecycle {
+    ignore_changes = [ defined_tags["Oracle-Tags.CreatedBy"], defined_tags["Oracle-Tags.CreatedOn"] ]
+  }
+  
   dynamic "shape_details" {
     for_each = local.is_flexible_lb_shape ? [1] : []
     content {

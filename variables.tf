@@ -7,16 +7,17 @@ variable "compartment_ocid" {}
 variable "user_ocid" {}
 variable "fingerprint" {}
 variable "private_key_path" {}
+variable "private_key_password" {}
 variable "region" {}
 variable "ATP_password" {}
-variable "availablity_domain_name" {}
+variable "availability_domain" {}
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
   default     = "1.1"
 }
 
-variable "ssh_public_key" {
+variable "ssh_public_key_path" {
   default = ""
 }
 
@@ -116,4 +117,5 @@ locals {
 # Checks if is using Flexible Compute Shapes
 locals {
   is_flexible_node_shape = contains(local.compute_flexible_shapes, var.instance_shape)
+  availability_domain_name = lookup(data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain],"name")
 }
