@@ -89,7 +89,8 @@ It's possible to utilize this as a module, providing the necessary inputs:
 
 ```
 module "ha-web" {
-  source               = "
+  source               = "<git repo URL>"
+  
   # Authentication
   tenancy_ocid         = "<tenancy_ocid>"
   user_ocid            = "<user_ocid>"
