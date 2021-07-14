@@ -54,7 +54,7 @@ resource "oci_core_instance" "compute_instance1" {
   }
 
   metadata = {
-    ssh_authorized_keys = file(var.ssh_public_key_path)
+    ssh_authorized_keys = local.ssh_public_key
     user_data = data.template_cloudinit_config.cloud_init.rendered
   }
 
@@ -96,7 +96,7 @@ resource "oci_core_instance" "compute_instance2" {
   }
 
   metadata = {
-    ssh_authorized_keys = file(var.ssh_public_key_path)
+    ssh_authorized_keys = local.ssh_public_key
     user_data = data.template_cloudinit_config.cloud_init.rendered
   }
 

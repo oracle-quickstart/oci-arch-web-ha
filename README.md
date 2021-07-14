@@ -65,6 +65,8 @@ region = "<oci_region>"
 
 # Availablity Domain 
 availablity_domain = "<availablity_domain_number>"
+### USE ONE ^ OR THE OTHER v
+availability_domain_name = "<availability_domain_name>"
 
 # Compartment
 compartment_ocid = "<compartment_ocid>"
@@ -81,6 +83,41 @@ Run the following commands:
 When you no longer need the deployment, you can run this command to destroy the resources:
 
     terraform destroy
+
+## Deploy as a Module
+It's possible to utilize this as a module, providing the necessary inputs:
+
+```
+module "ha-web" {
+  source               = "
+  # Authentication
+  tenancy_ocid         = "<tenancy_ocid>"
+  user_ocid            = "<user_ocid>"
+  fingerprint          = "<finger_print>"
+  private_key          = "<contents_of_private_key>"
+  ### USE ONE ^ OR THE OTHER v
+  private_key_path     = "<pem_private_key_path>"
+  private_key_password = "<pem_private_key_password>"
+
+  # SSH Keys
+  ssh_public_key       = "<contents_of_public_ssh_key>"
+  ### USE ONE ^ OR THE OTHER v
+  ssh_public_key_path  = "<public_ssh_key_path>"
+
+  # database
+  ATP_password           = "<ATP_user_password>"
+  ATP_data_guard_enabled = false # set the value to true only when you want to enable standby and then re-run terraform apply
+
+  # Region
+  region = "<oci_region>"
+
+  # Availablity Domain 
+  availablity_domain = "<availablity_domain_number>"
+
+  # Compartment
+  compartment_ocid = "<compartment_ocid>"
+}
+```
 
 ## Architecture Diagram
 

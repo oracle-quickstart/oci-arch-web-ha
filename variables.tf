@@ -3,20 +3,41 @@
 
 # Variables
 variable "tenancy_ocid" {}
-variable "compartment_ocid" {}
-variable "user_ocid" {}
-variable "fingerprint" {}
-variable "private_key_path" {}
-variable "private_key_password" {}
+variable "compartment_ocid" {
+  default = ""
+}
+variable "user_ocid" {
+  default = ""
+}
+variable "fingerprint" {
+  default = ""
+}
+variable "private_key" {
+  default = ""
+}
+variable "private_key_path" {
+  default = ""
+}
+variable "private_key_password" {
+  default = ""
+}
 variable "region" {}
 variable "ATP_password" {}
-variable "availability_domain" {}
+variable "availability_domain" {
+  default = ""
+}
+variable "availability_domain_name" {
+  default = ""
+}
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
   default     = "1.1"
 }
 
+variable "ssh_public_key" {
+  default = ""
+}
 variable "ssh_public_key_path" {
   default = ""
 }
@@ -106,16 +127,16 @@ variable  "ATP_data_guard_enabled" {
   default = false 
 }
 
-# Dictionary Locals
 locals {
+  # Dictionary Locals
   compute_flexible_shapes = [
     "VM.Standard.E3.Flex",
     "VM.Standard.E4.Flex"
   ]
-}
-
-# Checks if is using Flexible Compute Shapes
-locals {
+  # Checks if is using Flexible Compute Shapes
   is_flexible_node_shape = contains(local.compute_flexible_shapes, var.instance_shape)
-  availability_domain_name = lookup(data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain],"name")
+  
+  availability_domain_name = var.availability_domain_name == "" ? lookup(data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain],"name") : var.availability_domain_name
+  private_key = var.private_key == "" ? file(var.private_key_path) : var.private_key
+  ssh_public_key = var.ssh_public_key == "" ? file(var.ssh_public_key_path) : var.ssh_public_key
 }
