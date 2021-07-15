@@ -32,7 +32,7 @@ variable "availability_domain_name" {
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.1"
+  default     = "1.2"
 }
 
 variable "ssh_public_key" {
@@ -66,15 +66,15 @@ variable "linux_os_version" {
 }
 
 variable "instance_shape" {
-   default = "VM.Standard.E3.Flex"
+  default = "VM.Standard.E3.Flex"
 }
 
 variable "instance_flex_shape_ocpus" {
-    default = 1
+  default = 1
 }
 
 variable "instance_flex_shape_memory" {
-    default = 10
+  default = 10
 }
 
 variable "ATP_private_endpoint" {
@@ -123,8 +123,8 @@ variable "ATP_private_endpoint_label" {
   default = "ATPPrivateEndpoint"
 }
 
-variable  "ATP_data_guard_enabled" {
-  default = false 
+variable "ATP_data_guard_enabled" {
+  default = false
 }
 
 locals {
@@ -135,8 +135,8 @@ locals {
   ]
   # Checks if is using Flexible Compute Shapes
   is_flexible_node_shape = contains(local.compute_flexible_shapes, var.instance_shape)
-  
-  availability_domain_name = var.availability_domain_name == "" ? lookup(data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain],"name") : var.availability_domain_name
-  private_key = var.private_key == "" ? file(var.private_key_path) : var.private_key
-  ssh_public_key = var.ssh_public_key == "" ? file(var.ssh_public_key_path) : var.ssh_public_key
+
+  availability_domain_name = var.availability_domain_name == "" ? lookup(data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain], "name") : var.availability_domain_name
+  private_key              = var.private_key == "" ? file(var.private_key_path) : var.private_key
+  ssh_public_key           = var.ssh_public_key == "" ? file(var.ssh_public_key_path) : var.ssh_public_key
 }
