@@ -14,6 +14,13 @@
       - tenancy_ocid
       - region
       - release
+      - private_key
+      - private_key_path
+      - private_key_password
+      - availability_domain
+      - fingerprint
+      - user_ocid
+      - ssh_public_key_path
 
     - title: Required Configuration
       visible: true  
@@ -21,7 +28,7 @@
       - ATP_password
       - ATP_private_endpoint 
       - compartment_ocid
-      - availablity_domain_name
+      - availability_domain_name
       - show_advanced
 
     - title: Load Balancer Optional Configuration
@@ -85,7 +92,7 @@
         title: Region
         description: "Region where you want to deploy the resources defined by this stack."
 
-      availablity_domain_name:
+      availability_domain_name:
         type: oci:identity:availabilitydomain:name
         required: true
         visibile: true

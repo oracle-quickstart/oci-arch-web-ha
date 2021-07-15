@@ -9,4 +9,7 @@ resource "oci_core_virtual_network" "vcn" {
   display_name   = "web-app-vcn"
   dns_label      = "tfexamplevcn"
   defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+  lifecycle {
+    ignore_changes = [ defined_tags["Oracle-Tags.CreatedBy"], defined_tags["Oracle-Tags.CreatedOn"] ]
+  }
 }

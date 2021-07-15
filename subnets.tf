@@ -12,7 +12,10 @@ resource "oci_core_subnet" "subnet_1" {
   route_table_id    = oci_core_route_table.rt-pub.id
   dns_label         = "subnet1"
   defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
-
+  lifecycle {
+    ignore_changes = [ defined_tags["Oracle-Tags.CreatedBy"], defined_tags["Oracle-Tags.CreatedOn"] ]
+  }
+  
   provisioner "local-exec" {
     command = "sleep 5"
   }
@@ -27,7 +30,10 @@ resource "oci_core_subnet" "subnet_2" {
   route_table_id    = oci_core_route_table.rt-pub.id
   dns_label         = "subnet2"
   defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
-
+  lifecycle {
+    ignore_changes = [ defined_tags["Oracle-Tags.CreatedBy"], defined_tags["Oracle-Tags.CreatedOn"] ]
+  }
+  
   provisioner "local-exec" {
     command = "sleep 5"
   }
@@ -43,7 +49,10 @@ resource "oci_core_subnet" "subnet_3" {
   dns_label         = "subnet3"
   prohibit_public_ip_on_vnic = true
   defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
-
+  lifecycle {
+    ignore_changes = [ defined_tags["Oracle-Tags.CreatedBy"], defined_tags["Oracle-Tags.CreatedOn"] ]
+  }
+  
   provisioner "local-exec" {
     command = "sleep 5"
   }

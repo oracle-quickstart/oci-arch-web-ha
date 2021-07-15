@@ -36,7 +36,7 @@ If you don't have the required permissions and quota, contact your tenancy admin
 
 ## Deploy Using the Terraform CLI
 
-### Clone the Module
+### Clone the Repository
 Now, you'll want a local copy of this repo. You can make that with the commands:
 
     git clone https://github.com/oracle-quickstart/oci-arch-web-ha.git
@@ -51,10 +51,10 @@ tenancy_ocid         = "<tenancy_ocid>"
 user_ocid            = "<user_ocid>"
 fingerprint          = "<finger_print>"
 private_key_path     = "<pem_private_key_path>"
+private_key_password = "<pem_private_key_password>"
 
 # SSH Keys
-ssh_public_key  = "<public_ssh_key_path>"
-ssh_private_key  = "<private_ssh_key_path>"
+ssh_public_key_path  = "<public_ssh_key_path>"
 
 # database
 ATP_password           = "<ATP_user_password>"
@@ -64,12 +64,13 @@ ATP_data_guard_enabled = false # set the value to true only when you want to ena
 region = "<oci_region>"
 
 # Availablity Domain 
-availablity_domain_name = "<availablity_domain_name>"
+availablity_domain = "<availablity_domain_number>"
+### USE ONE ^ OR THE OTHER v
+availability_domain_name = "<availability_domain_name>"
 
 # Compartment
 compartment_ocid = "<compartment_ocid>"
-
-````
+```
 
 ### Create the Resources
 Run the following commands:
@@ -83,7 +84,42 @@ When you no longer need the deployment, you can run this command to destroy the 
 
     terraform destroy
 
+## Deploy as a Module
+It's possible to utilize this as a module, providing the necessary inputs:
+
+```
+module "ha-web" {
+  source               = "<git repo URL>"
+  
+  # Authentication
+  tenancy_ocid         = "<tenancy_ocid>"
+  user_ocid            = "<user_ocid>"
+  fingerprint          = "<finger_print>"
+  private_key          = "<contents_of_private_key>"
+  ### USE ONE ^ OR THE OTHER v
+  private_key_path     = "<pem_private_key_path>"
+  private_key_password = "<pem_private_key_password>"
+
+  # SSH Keys
+  ssh_public_key       = "<contents_of_public_ssh_key>"
+  ### USE ONE ^ OR THE OTHER v
+  ssh_public_key_path  = "<public_ssh_key_path>"
+
+  # database
+  ATP_password           = "<ATP_user_password>"
+  ATP_data_guard_enabled = false # set the value to true only when you want to enable standby and then re-run terraform apply
+
+  # Region
+  region = "<oci_region>"
+
+  # Availablity Domain 
+  availablity_domain = "<availablity_domain_number>"
+
+  # Compartment
+  compartment_ocid = "<compartment_ocid>"
+}
+```
+
 ## Architecture Diagram
 
 ![](./images/web-app-diagram.png)
-

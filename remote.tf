@@ -51,7 +51,7 @@ resource "null_resource" "compute-script1" {
       agent       = false
       timeout     = "10m"
     }
-    source      = "flask_dir/static/css/"
+    source      = "${path.module}/flask_dir/static/css/"
     destination = "/home/opc/static/css"
   }
 
@@ -65,7 +65,7 @@ resource "null_resource" "compute-script1" {
       agent       = false
       timeout     = "10m"
     }
-    source      = "flask_dir/static/img/"
+    source      = "${path.module}/flask_dir/static/img/"
     destination = "/home/opc/static/img"
   }
 
@@ -79,7 +79,7 @@ resource "null_resource" "compute-script1" {
       agent       = false
       timeout     = "10m"
     }
-    source      = "flask_dir/templates/"
+    source      = "${path.module}/flask_dir/templates/"
     destination = "/home/opc/templates"
   }
 
@@ -93,7 +93,7 @@ resource "null_resource" "compute-script1" {
       agent       = false
       timeout     = "10m"
     }
-    source      = "flask_dir/"
+    source      = "${path.module}/flask_dir/"
     destination = "/home/opc/"
   }
 
@@ -107,7 +107,7 @@ resource "null_resource" "compute-script1" {
       agent       = false
       timeout     = "10m"
     }
-    source      = "db_scripts/"
+    source      = "${path.module}/db_scripts/"
     destination = "/home/opc/"
   }
 
@@ -253,7 +253,7 @@ resource "null_resource" "compute-script2" {
       agent       = false
       timeout     = "10m"
     }
-    source      = "flask_dir/static/css/"
+    source      = "${path.module}/flask_dir/static/css/"
     destination = "/home/opc/static/css"
   }
 
@@ -267,7 +267,7 @@ resource "null_resource" "compute-script2" {
       agent       = false
       timeout     = "10m"
     }
-    source      = "flask_dir/static/img/"
+    source      = "${path.module}/flask_dir/static/img/"
     destination = "/home/opc/static/img"
   }
 
@@ -281,7 +281,7 @@ resource "null_resource" "compute-script2" {
       agent       = false
       timeout     = "10m"
     }
-    source      = "flask_dir/templates/"
+    source      = "${path.module}/flask_dir/templates/"
     destination = "/home/opc/templates"
   }
 
@@ -295,7 +295,7 @@ resource "null_resource" "compute-script2" {
       agent       = false
       timeout     = "10m"
     }
-    source      = "flask_dir/"
+    source      = "${path.module}/flask_dir/"
     destination = "/home/opc/"
   }
 
@@ -309,7 +309,7 @@ resource "null_resource" "compute-script2" {
       agent       = false
       timeout     = "10m"
     }
-    source      = "db_scripts/"
+    source      = "${path.module}/db_scripts/"
     destination = "/home/opc/"
   }
 
