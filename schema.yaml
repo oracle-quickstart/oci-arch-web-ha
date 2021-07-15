@@ -196,6 +196,12 @@
               - eq:
                 - instance_shape 
                 - "VM.Standard.E4.Flex"
+              - eq:
+                - instance_shape 
+                - "VM.Optimized3.Flex"
+              - eq:
+                - instance_shape 
+                - "VM.Standard.A1.Flex"
 
       instance_flex_shape_memory:
         type: number
@@ -215,6 +221,12 @@
               - eq:
                 - instance_shape
                 - "VM.Standard.E4.Flex"
+              - eq:
+                - instance_shape 
+                - "VM.Optimized3.Flex"
+              - eq:
+                - instance_shape 
+                - "VM.Standard.A1.Flex"
       
       instance_os:
         type: enum
