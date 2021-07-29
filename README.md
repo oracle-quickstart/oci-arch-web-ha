@@ -65,8 +65,8 @@ ATP_data_guard_enabled = false # set the value to true only when you want to ena
 # Region
 region = "<oci_region>"
 
-# Availablity Domain 
-availablity_domain = "<availablity_domain_number>"
+# Availability Domain 
+availability_domain = "<availability_domain_number>"
 ### USE ONE ^ OR THE OTHER v
 availability_domain_name = "<availability_domain_name>"
 
@@ -96,7 +96,7 @@ module "oci-arch-web-ha" {
   user_ocid            = "<user_ocid>"
   fingerprint          = "<finger_print>"
   region               = "<oci_region>"
-  availability_domain  = "<availablity_domain_number>"
+  availability_domain  = "<availability_domain_number>"
   compartment_ocid     = "<compartment_ocid>"
   
   private_key          = "<contents_of_private_key>"
