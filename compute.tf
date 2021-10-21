@@ -1,4 +1,4 @@
-## Copyright © 2020, Oracle and/or its affiliates. 
+## Copyright © 2021, Oracle and/or its affiliates. 
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 # This Terraform script provisions a compute instance
@@ -29,18 +29,18 @@ resource "oci_core_instance" "compute_instance1" {
   display_name        = "Web-Server-1"
   shape               = var.instance_shape
   lifecycle {
-    ignore_changes = [ defined_tags["Oracle-Tags.CreatedBy"], defined_tags["Oracle-Tags.CreatedOn"] ]
+    ignore_changes = [defined_tags["Oracle-Tags.CreatedBy"], defined_tags["Oracle-Tags.CreatedOn"]]
   }
-  
+
   dynamic "shape_config" {
     for_each = local.is_flexible_node_shape ? [1] : []
     content {
       memory_in_gbs = var.instance_flex_shape_memory
-      ocpus = var.instance_flex_shape_ocpus
+      ocpus         = var.instance_flex_shape_ocpus
     }
   }
 
-  fault_domain        = "FAULT-DOMAIN-1"
+  fault_domain = "FAULT-DOMAIN-1"
 
   source_details {
     source_type             = "image"
@@ -50,15 +50,15 @@ resource "oci_core_instance" "compute_instance1" {
 
   create_vnic_details {
     subnet_id = oci_core_subnet.subnet_2.id
-    nsg_ids = [oci_core_network_security_group.WebSecurityGroup.id, oci_core_network_security_group.SSHSecurityGroup.id]
+    nsg_ids   = [oci_core_network_security_group.WebSecurityGroup.id, oci_core_network_security_group.SSHSecurityGroup.id]
   }
 
   metadata = {
     ssh_authorized_keys = local.ssh_public_key
-    user_data = data.template_cloudinit_config.cloud_init.rendered
+    user_data           = data.template_cloudinit_config.cloud_init.rendered
   }
 
-  defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+  defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 
   timeouts {
     create = "60m"
@@ -71,18 +71,18 @@ resource "oci_core_instance" "compute_instance2" {
   display_name        = "Web-Server-2"
   shape               = var.instance_shape
   lifecycle {
-    ignore_changes = [ defined_tags["Oracle-Tags.CreatedBy"], defined_tags["Oracle-Tags.CreatedOn"] ]
+    ignore_changes = [defined_tags["Oracle-Tags.CreatedBy"], defined_tags["Oracle-Tags.CreatedOn"]]
   }
-  
+
   dynamic "shape_config" {
     for_each = local.is_flexible_node_shape ? [1] : []
     content {
       memory_in_gbs = var.instance_flex_shape_memory
-      ocpus = var.instance_flex_shape_ocpus
+      ocpus         = var.instance_flex_shape_ocpus
     }
   }
 
-  fault_domain        = "FAULT-DOMAIN-2"
+  fault_domain = "FAULT-DOMAIN-2"
 
   source_details {
     source_type             = "image"
@@ -92,15 +92,15 @@ resource "oci_core_instance" "compute_instance2" {
 
   create_vnic_details {
     subnet_id = oci_core_subnet.subnet_2.id
-    nsg_ids = [oci_core_network_security_group.WebSecurityGroup.id, oci_core_network_security_group.SSHSecurityGroup.id]
+    nsg_ids   = [oci_core_network_security_group.WebSecurityGroup.id, oci_core_network_security_group.SSHSecurityGroup.id]
   }
 
   metadata = {
     ssh_authorized_keys = local.ssh_public_key
-    user_data = data.template_cloudinit_config.cloud_init.rendered
+    user_data           = data.template_cloudinit_config.cloud_init.rendered
   }
 
-  defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+  defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 
   timeouts {
     create = "60m"
