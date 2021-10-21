@@ -1,9 +1,9 @@
-## Copyright © 2020, Oracle and/or its affiliates. 
+## Copyright © 2021, Oracle and/or its affiliates. 
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 resource "null_resource" "compute-script1" {
-  depends_on = [oci_core_instance.compute_instance1, oci_database_autonomous_database.ATPdatabase, oci_core_network_security_group_security_rule.ATPSecurityEgressGroupRule, oci_core_network_security_group_security_rule.ATPSecurityIngressGroupRules]
-  
+  depends_on = [oci_core_instance.compute_instance1, module.oci-adb.adb_database, oci_core_network_security_group_security_rule.ATPSecurityEgressGroupRule, oci_core_network_security_group_security_rule.ATPSecurityIngressGroupRules]
+
   provisioner "remote-exec" {
     connection {
       type        = "ssh"
@@ -28,7 +28,7 @@ resource "null_resource" "compute-script1" {
 
       "echo '== [compute_instance1] 3. Disabling firewall and starting HTTPD service'",
       "sudo -u root service firewalld stop",
-      
+
       "echo '== [compute_instance1] 4. Prepare Flask directory structure'",
       "sudo -u root mkdir /home/opc/templates",
       "sudo -u root chown opc /home/opc/templates/",
@@ -38,7 +38,7 @@ resource "null_resource" "compute-script1" {
       "sudo -u root chown opc /home/opc/static/css/",
       "sudo -u root mkdir /home/opc/static/img",
       "sudo -u root chown opc /home/opc/static/img/"
-      ]
+    ]
   }
 
   provisioner "file" {
@@ -112,7 +112,7 @@ resource "null_resource" "compute-script1" {
   }
 
   provisioner "local-exec" {
-    command = "echo '${oci_database_autonomous_database_wallet.ATP_database_wallet.content}' >> ${var.ATP_tde_wallet_zip_file}_encoded"
+    command = "echo '${module.oci-adb.adb_database.adb_wallet_content}' >> ${var.ATP_tde_wallet_zip_file}_encoded"
   }
 
   provisioner "local-exec" {
@@ -150,9 +150,9 @@ resource "null_resource" "compute-script1" {
     inline = [
       "echo '== [compute_instance1] 4. Unzip TDE wallet zip file'",
       "sudo -u root unzip -o /home/opc/${var.ATP_tde_wallet_zip_file} -d /usr/lib/oracle/18.3/client64/lib/network/admin/",
-      
+
       "echo '== [compute_instance1] 5. Move sqlnet.ora to /usr/lib/oracle/18.3/client64/lib/network/admin/'",
-      "sudo -u root cp /home/opc/sqlnet.ora /usr/lib/oracle/18.3/client64/lib/network/admin/"]
+    "sudo -u root cp /home/opc/sqlnet.ora /usr/lib/oracle/18.3/client64/lib/network/admin/"]
   }
 
   provisioner "remote-exec" {
@@ -200,13 +200,13 @@ resource "null_resource" "compute-script1" {
       "sudo -u root systemctl stop firewalld",
       "sudo -u root systemctl disable firewalld",
       "sleep 5",
-      "sudo -u root ps -ef | grep app"]
+    "sudo -u root ps -ef | grep app"]
   }
 }
 
 resource "null_resource" "compute-script2" {
-  depends_on = [oci_core_instance.compute_instance1, oci_database_autonomous_database.ATPdatabase, null_resource.compute-script1]
-  
+  depends_on = [oci_core_instance.compute_instance1, module.oci-adb.adb_database, null_resource.compute-script1]
+
   provisioner "remote-exec" {
     connection {
       type        = "ssh"
@@ -230,9 +230,9 @@ resource "null_resource" "compute-script2" {
 
       "echo '== [compute_instance2] 3. Disabling firewall and starting HTTPD service'",
       "sudo -u root service firewalld stop",
-      
+
       "echo '== [compute_instance2] 4. Prepare Flask directory structure'",
-      "sudo -u root mkdir /home/opc/templates", 
+      "sudo -u root mkdir /home/opc/templates",
       "sudo -u root chown opc /home/opc/templates/",
       "sudo -u root mkdir /home/opc/static/",
       "sudo -u root chown opc /home/opc/static",
@@ -240,7 +240,7 @@ resource "null_resource" "compute-script2" {
       "sudo -u root chown opc /home/opc/static/css/",
       "sudo -u root mkdir /home/opc/static/img",
       "sudo -u root chown opc /home/opc/static/img/"
-      ]
+    ]
   }
 
   provisioner "file" {
@@ -314,7 +314,7 @@ resource "null_resource" "compute-script2" {
   }
 
   provisioner "local-exec" {
-    command = "echo '${oci_database_autonomous_database_wallet.ATP_database_wallet.content}' >> ${var.ATP_tde_wallet_zip_file}_encoded"
+    command = "echo '${module.oci-adb.adb_database.adb_wallet_content}' >> ${var.ATP_tde_wallet_zip_file}_encoded"
   }
 
   provisioner "local-exec" {
@@ -352,9 +352,9 @@ resource "null_resource" "compute-script2" {
     inline = [
       "echo '== [compute_instance2] 4. Unzip TDE wallet zip file'",
       "sudo -u root unzip -o /home/opc/${var.ATP_tde_wallet_zip_file} -d /usr/lib/oracle/18.3/client64/lib/network/admin/",
-      
+
       "echo '== [compute_instance2] 5. Move sqlnet.ora to /usr/lib/oracle/18.3/client64/lib/network/admin/'",
-      "sudo -u root cp /home/opc/sqlnet.ora /usr/lib/oracle/18.3/client64/lib/network/admin/"]
+    "sudo -u root cp /home/opc/sqlnet.ora /usr/lib/oracle/18.3/client64/lib/network/admin/"]
   }
 
   provisioner "remote-exec" {
@@ -382,9 +382,9 @@ resource "null_resource" "compute-script2" {
       "sudo -u root systemctl stop firewalld",
       "sudo -u root systemctl disable firewalld",
       "sleep 5",
-      "sudo -u root ps -ef | grep app"]
+    "sudo -u root ps -ef | grep app"]
   }
 }
 
-     
+
 

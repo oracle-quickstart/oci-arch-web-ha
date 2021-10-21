@@ -1,4 +1,4 @@
-## Copyright © 2020, Oracle and/or its affiliates. 
+## Copyright © 2021, Oracle and/or its affiliates. 
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 # Variables
@@ -32,7 +32,7 @@ variable "availability_domain_name" {
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.2"
+  default     = "1.3"
 }
 
 variable "ssh_public_key" {
@@ -90,7 +90,7 @@ variable "ATP_database_data_storage_size_in_tbs" {
 }
 
 variable "ATP_database_db_name" {
-  default = "aTFdb"
+  default = "WEBHAATP"
 }
 
 variable "ATP_database_db_version" {
@@ -102,12 +102,12 @@ variable "ATP_database_defined_tags_value" {
 }
 
 variable "ATP_database_display_name" {
-  default = "ATP"
+  default = "WEBHAATP"
 }
 
 variable "ATP_database_freeform_tags" {
   default = {
-    "Owner" = "ATP"
+    "Owner" = "WEBHAATP"
   }
 }
 
@@ -116,7 +116,7 @@ variable "ATP_database_license_model" {
 }
 
 variable "ATP_tde_wallet_zip_file" {
-  default = "tde_wallet_aTFdb.zip"
+  default = "tde_wallet_WEBHAATP.zip"
 }
 
 variable "ATP_private_endpoint_label" {
