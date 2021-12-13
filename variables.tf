@@ -22,7 +22,7 @@ variable "availability_domain_name" {
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.3"
+  default     = "1.3.1"
 }
 
 variable "ssh_public_key" {
